@@ -6,7 +6,7 @@ namespace JogoDaVelha
     {
         // declaracao de variaveis relacionadas ao funcionamento do jogo
 
-        private char[] posicoes;
+        private char[] campos;
         private bool fim;
         private int quantidadeEscolhida;
         private char vez;
@@ -16,7 +16,7 @@ namespace JogoDaVelha
             // associando as variaveis a seus valores iniciais
 
             vez = 'X';
-            posicoes = new[] { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+            campos = new[] { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
             quantidadeEscolhida = 0;
             fim = false;
         }
@@ -46,7 +46,7 @@ namespace JogoDaVelha
             if (quantidadeEscolhida < 5)
                 return;
 
-            if (ExisteVitoriaHorizontal() || ExisteVitoriaVertical() || ExisteVitoriaDiagonal())
+            if (VitoriaHorizontal() || VitoriaVertical() || VitoriaDiagonal())
             {
                 fim = true;
                 Console.WriteLine($"O jogo terminou! O jogador {vez} ganhou.");
@@ -62,28 +62,28 @@ namespace JogoDaVelha
             }
         }
 
-        private bool ExisteVitoriaHorizontal()
+        private bool VitoriaHorizontal()
         {
-            bool Linha1 = posicoes[0] == posicoes[1] && posicoes[0] == posicoes[2];
-            bool Linha2 = posicoes[3] == posicoes[4] && posicoes[3] == posicoes[5];
-            bool Linha3 = posicoes[6] == posicoes[7] && posicoes[6] == posicoes[8];
+            bool Linha1 = campos[0] == campos[1] && campos[0] == campos[2];
+            bool Linha2 = campos[3] == campos[4] && campos[3] == campos[5];
+            bool Linha3 = campos[6] == campos[7] && campos[6] == campos[8];
 
             return Linha1 || Linha2 || Linha3;
         }
 
-        private bool ExisteVitoriaVertical()
+        private bool VitoriaVertical()
         {
-            bool Coluna1 = posicoes[0] == posicoes[3] && posicoes[0] == posicoes[6];
-            bool Coluna2 = posicoes[1] == posicoes[4] && posicoes[1] == posicoes[7];
-            bool Coluna3 = posicoes[2] == posicoes[5] && posicoes[2] == posicoes[8];
+            bool Coluna1 = campos[0] == campos[3] && campos[0] == campos[6];
+            bool Coluna2 = campos[1] == campos[4] && campos[1] == campos[7];
+            bool Coluna3 = campos[2] == campos[5] && campos[2] == campos[8];
 
             return Coluna1 || Coluna2 || Coluna3;
         }
 
-        private bool ExisteVitoriaDiagonal()
+        private bool VitoriaDiagonal()
         {
-            bool Diagonal1 = posicoes[2] == posicoes[4] && posicoes[2] == posicoes[6];
-            bool Diagonal2 = posicoes[0] == posicoes[4] && posicoes[0] == posicoes[8];
+            bool Diagonal1 = campos[2] == campos[4] && campos[2] == campos[6];
+            bool Diagonal2 = campos[0] == campos[4] && campos[0] == campos[8];
 
             return Diagonal1 || Diagonal2;
         }
@@ -109,14 +109,14 @@ namespace JogoDaVelha
             int indice = posicaoEscolhida - 1;
 
             quantidadeEscolhida++;
-            posicoes[indice] = vez;
+            campos[indice] = vez;
         }
 
         private bool ValidarEscolhaUsuario(int posicaoEscolhida)
         {
             int indice = posicaoEscolhida - 1;
 
-            return posicoes[indice] != 'X' && posicoes[indice] != 'O';
+            return campos[indice] != 'X' && campos[indice] != 'O';
         }
 
         private void MostrarTabela()
@@ -127,9 +127,9 @@ namespace JogoDaVelha
 
         private string Tabela()
         {
-            return $"__{posicoes[0]}__|__{posicoes[1]}__|__{posicoes[2]}__\n" +
-                   $"__{posicoes[3]}__|__{posicoes[4]}__|__{posicoes[5]}__\n" +
-                   $"  {posicoes[6]}  |  {posicoes[7]}  |  {posicoes[8]}  \n\n";
+            return $"__{campos[0]}__|__{campos[1]}__|__{campos[2]}__\n" +
+                   $"__{campos[3]}__|__{campos[4]}__|__{campos[5]}__\n" +
+                   $"  {campos[6]}  |  {campos[7]}  |  {campos[8]}  \n\n";
         }
     }
 }
